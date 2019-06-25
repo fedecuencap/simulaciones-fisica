@@ -25,8 +25,8 @@ def choque(ball1, ball2):
         return False
 
 
-def Fuerza(v, b):
-	return - b*v
+def Fuerza(v, b, angulo):
+	return - b*v 
 
 def moverBlanca(blanca, click, negra):
 	t0 = time.time()
@@ -43,7 +43,7 @@ def moverBlanca(blanca, click, negra):
 		t = time.time() - t0
 		if(t >= n * DeltaT):
 			if(V > 0):
-				VTemp = V + DeltaT * Fuerza(V, 0.1) /M
+				VTemp = V + DeltaT * Fuerza(V, 0.1, angulo) /M
 				Dx = VTemp * DeltaT * cos(radians(angulo))
 				Dy = VTemp * DeltaT * sin(radians(angulo))
 				V = VTemp
@@ -67,7 +67,7 @@ def moverNegra(negra, V, angulo, blanca):
 		t = time.time() - t0
 		if(t >= n * DeltaT):
 			if(V > 0):
-				VTemp = V + DeltaT * Fuerza(V, 0.1) /M
+				VTemp = V + DeltaT * Fuerza(V, 0.1, angulo) /M
 				Dx = VTemp * DeltaT * cos(radians(angulo))
 				Dy = VTemp * DeltaT * sin(radians(angulo))
 				V = VTemp
