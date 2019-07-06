@@ -58,20 +58,13 @@ def mover(blanca, click, roja):
 				if(abs(blanca.getCenter().getY() - 500) <= RADIO or blanca.getCenter().getY() <= RADIO):
 					VyBlanca = - VyBlanca
 			if(choque(blanca, roja)):
-				angChoque = degrees(atan2(roja.getCenter().getY() - blanca.getCenter().getY(), roja.getCenter().getX() - blanca.getCenter().getX()))
-				print("angChoque: " + str(angChoque))
-				VBlanca = (((VxBlanca)**2 + (VyBlanca)**2)**0.5)*sin(angChoque)
-				print("VBlanca: " + str(VBlanca))
-				VRoja = (((VxBlanca)**2 + (VyBlanca)**2)**0.5)*cos(angChoque)
-				print("VRoja: " + str(VRoja))
-				VxRoja = VRoja * cos(radians(angChoque))
-				print("VxRoja: " + str(VxRoja))
-				VyRoja = VRoja * sin(radians(angChoque))
-				print("VyRoja: " + str(VyRoja))
-				VxBlanca = VBlanca * sin(radians(90 - angChoque))
-				print("VxBlanca: " + str(VxBlanca))
-				VyBlanca = VBlanca * cos(radians(90 - angChoque))
-				print("VyBlanca: " + str(VyBlanca))
+				angChoque = atan2(roja.getCenter().getY() - blanca.getCenter().getY(), roja.getCenter().getX() - blanca.getCenter().getX())
+				VxTemp = VxRoja
+				VyTemp = VyRoja
+				VxRoja = VxBlanca * cos(angChoque)
+				VyRoja = VyBlanca * sin(angChoque)
+				VxBlanca = VxTemp * sin(angChoque)
+				VyRoja = VyTemp * cos(angChoque)
 			if(abs(VxRoja) >= 0.5 and abs(VyRoja) >= 0.5):
 				VxRojaTemp = VxRoja + DeltaT * (Fuerza(VxRoja, 0.1)/M)
 				VyRojaTemp = VyRoja + DeltaT * (Fuerza(VyRoja, 0.1)/M)
@@ -91,7 +84,7 @@ def main():
 	WIN_SIZE_Y = 500
 	win = GraphWin("Simulación 2", WIN_SIZE_X, WIN_SIZE_Y)
 	win.setBackground("green")
-	angChoque
+
 	blanca = Circle(Point(X0 + 200,Y0),RADIO)
 	blanca.setFill("white")
 	blanca.setOutline("white")
